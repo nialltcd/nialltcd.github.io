@@ -155,6 +155,28 @@ getJSON('https://raw.githubusercontent.com/lsv/fifa-worldcup-2018/master/data.js
         	
     	}
         
+        
+        // Load all knockout stage games
+    	for (var key in data["knockout"]) {
+        	var group = data["knockout"][key];
+            for (var match in group["matches"])
+            {
+				var match = group["matches"][match];
+                if (match["finished"] == true)
+                {
+					team_dict[match['home_team']].played += 1
+					team_dict[match['away_team']].played += 1 
+                    team_dict[match['home_team']].scored += match['home_result']
+					team_dict[match['away_team']].scored += match['away_result']
+                    team_dict[match['home_team']].conceded += match['away_result']
+					team_dict[match['away_team']].conceded += match['home_result']
+                	team_dict[match['winner']].points += 3 
+				}
+            }
+        	
+    	}
+        
+        
         for (var key in team_dict) {
        	 	var team = team_dict[key];
             for (var player_key in player_list)
@@ -196,8 +218,6 @@ getJSON('https://raw.githubusercontent.com/lsv/fifa-worldcup-2018/master/data.js
         document.body.innerHTML = table
     }
 });
-
-document.write("TEST")
 
 </script>
 
