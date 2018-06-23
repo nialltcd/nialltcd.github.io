@@ -278,7 +278,7 @@ getJSON('https://raw.githubusercontent.com/lsv/fifa-worldcup-2018/master/data.js
   			return b.points - a.points || b.goal_diff - a.goal_diff || b.scored - a.scored || b.conceded - a.conceded;
 		});
 
-        result_output = ""
+        result_output = "...The players team's are highlighted in yellow...<br /><br />"
         // Write Table
     	for (var key in player_list) {
        	 	var t = player_list[key];
