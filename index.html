@@ -43,7 +43,8 @@ getJSON('https://raw.githubusercontent.com/lsv/fifa-worldcup-2018/master/data.js
                 'won': 0,
                 'lost': 0,
                 'draw':0,                
-                'results': ""
+                'results': "", 
+                'fixtures': ""
 			},
             {
             	'player': 'David',
@@ -56,7 +57,8 @@ getJSON('https://raw.githubusercontent.com/lsv/fifa-worldcup-2018/master/data.js
                 'won': 0,
                 'lost': 0,
                 'draw':0, 
-                'results': ""
+                'results': "", 
+                'fixtures': ""
 			},
             {
             	'player': 'Niall',
@@ -69,7 +71,8 @@ getJSON('https://raw.githubusercontent.com/lsv/fifa-worldcup-2018/master/data.js
                 'won': 0,
                 'lost': 0,
                 'draw':0, 
-                'results': ""
+                'results': "", 
+                'fixtures': ""
 			},
             {
             	'player': 'Paraic',
@@ -82,7 +85,8 @@ getJSON('https://raw.githubusercontent.com/lsv/fifa-worldcup-2018/master/data.js
                 'won': 0,
                 'lost': 0,
                 'draw': 0, 
-                'results': ""
+                'results': "", 
+                'fixtures': ""
 			},
             {
             	'player': 'Eoin',
@@ -95,7 +99,8 @@ getJSON('https://raw.githubusercontent.com/lsv/fifa-worldcup-2018/master/data.js
                 'won': 0,
                 'lost': 0,
                 'draw':0, 
-                'results': ""
+                'results': "", 
+                'fixtures': ""
 			},
             {
             	'player': 'Mark',
@@ -108,7 +113,8 @@ getJSON('https://raw.githubusercontent.com/lsv/fifa-worldcup-2018/master/data.js
                 'won': 0,
                 'lost': 0,
                 'draw':0, 
-                'results': ""
+                'results': "", 
+                'fixtures': ""
 			},
             {
             	'player': 'Kevin',
@@ -121,7 +127,8 @@ getJSON('https://raw.githubusercontent.com/lsv/fifa-worldcup-2018/master/data.js
                 'won': 0,
                 'lost': 0,
                 'draw':0, 
-                'results': ""
+                'results': "", 
+                'fixtures': ""
 			},
             {
             	'player': 'Anto',
@@ -134,7 +141,8 @@ getJSON('https://raw.githubusercontent.com/lsv/fifa-worldcup-2018/master/data.js
                 'won': 0,
                 'lost': 0,
                 'draw':0, 
-                'results': ""
+                'results': "", 
+                'fixtures': ""
 			}
         ];
 
@@ -153,7 +161,8 @@ getJSON('https://raw.githubusercontent.com/lsv/fifa-worldcup-2018/master/data.js
                 	'won': 0,
                 	'lost': 0,
                 	'draw': 0, 
-                    'results': ""
+                    'results': "", 
+                	'fixtures': ""
 				}            	
     	}   
 
@@ -193,6 +202,11 @@ getJSON('https://raw.githubusercontent.com/lsv/fifa-worldcup-2018/master/data.js
                     team_dict[match['away_team']].results += team_dict[match['home_team']].name + " " + match['home_result'] + " - " + match['away_result'] + " <mark>" + team_dict[match['away_team']].name + "</mark><br />"
                     team_dict[match['home_team']].results += "<mark>" + team_dict[match['home_team']].name + "</mark> " + match['home_result'] + " - " + match['away_result'] + " " + team_dict[match['away_team']].name + "<br />"
 				}
+                else
+                {
+                	team_dict[match['away_team']].fixtures += team_dict[match['home_team']].name + " v <mark>" + team_dict[match['away_team']].name + "</mark><br />"
+                    team_dict[match['home_team']].fixtures += "<mark>" + team_dict[match['home_team']].name + "</mark>  v " + team_dict[match['away_team']].name + "<br />"
+                }
             }
         	
     	}
@@ -222,10 +236,17 @@ getJSON('https://raw.githubusercontent.com/lsv/fifa-worldcup-2018/master/data.js
                     	team_dict[match['home_team']].lost += 1
 						team_dict[match['away_team']].won += 1
                     }
-                    matches[match['away_team']] += team_dict[match['home_team']].name + " " + match['home_result'] + " - " + match['away_result'] + " " + team_dict[match['away_team']].name + "<br />"
-                    matches[match['home_team']] += team_dict[match['home_team']].name + " " + match['home_result'] + " - " + match['away_result'] + " " + team_dict[match['away_team']].name + "<br />"
-				
+                    team_dict[match['away_team']].results += team_dict[match['home_team']].name + " " + match['home_result'] + " - " + match['away_result'] + " <mark>" + team_dict[match['away_team']].name + "</mark><br />"
+                    team_dict[match['home_team']].results += "<mark>" + team_dict[match['home_team']].name + "</mark> " + match['home_result'] + " - " + match['away_result'] + " " + team_dict[match['away_team']].name + "<br />"
 				}
+                else 
+                {
+                	if (match['away_team'] in  team_dict)
+                		team_dict[match['away_team']].fixtures += team_dict[match['home_team']].name + " v <mark>" + team_dict[match['away_team']].name + "</mark><br />"
+					if (match['home_team'] in team_dict)
+                    	team_dict[match['home_team']].fixtures += "<mark>" + team_dict[match['home_team']].name + "</mark>  v " + team_dict[match['away_team']].name + "<br />"
+					           
+                }
             }
         	
     	}
@@ -243,6 +264,7 @@ getJSON('https://raw.githubusercontent.com/lsv/fifa-worldcup-2018/master/data.js
                     player.played += team.played
                     player.goal_diff = player.scored - player.conceded
                     player.results += team.results
+                    player.fixtures += team.fixtures
                     player.won += team.won
                     player.lost += team.lost
                     player.draw += team.draw
@@ -281,6 +303,8 @@ getJSON('https://raw.githubusercontent.com/lsv/fifa-worldcup-2018/master/data.js
             table += "</td></tr>"
             result_output += "<b>" + t.player + "'s Results:</b><br />"
             result_output += t.results + "<br />"
+            result_output += "<b>" + t.player + "'s Fixtures:</b><br />"
+            result_output += t.fixtures + "<br />"
     	}
         table += "</table>";
         
