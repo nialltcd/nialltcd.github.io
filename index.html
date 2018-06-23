@@ -39,6 +39,7 @@ getJSON('https://raw.githubusercontent.com/lsv/fifa-worldcup-2018/master/data.js
                 'played': 0,
                 'scored': 0,
                 'conceded' : 0,
+                'goal_diff': 0
 			},
             {
             	'player': 'David',
@@ -47,6 +48,7 @@ getJSON('https://raw.githubusercontent.com/lsv/fifa-worldcup-2018/master/data.js
                 'played': 0,
                 'scored': 0,
                 'conceded' : 0,
+                'goal_diff': 0
 			},
             {
             	'player': 'Niall',
@@ -55,6 +57,7 @@ getJSON('https://raw.githubusercontent.com/lsv/fifa-worldcup-2018/master/data.js
                 'played': 0,
                 'scored': 0,
                 'conceded' : 0,
+                'goal_diff': 0
 			},
             {
             	'player': 'Paraic',
@@ -63,6 +66,7 @@ getJSON('https://raw.githubusercontent.com/lsv/fifa-worldcup-2018/master/data.js
                 'played': 0,
                 'scored': 0,
                 'conceded' : 0,
+                'goal_diff': 0
 			},
             {
             	'player': 'Eoin',
@@ -71,6 +75,7 @@ getJSON('https://raw.githubusercontent.com/lsv/fifa-worldcup-2018/master/data.js
                 'played': 0,
                 'scored': 0,
                 'conceded' : 0,
+                'goal_diff': 0
 			},
             {
             	'player': 'Mark',
@@ -79,6 +84,7 @@ getJSON('https://raw.githubusercontent.com/lsv/fifa-worldcup-2018/master/data.js
                 'played': 0,
                 'scored': 0,
                 'conceded' : 0,
+                'goal_diff': 0
 			},
             {
             	'player': 'Kevin',
@@ -87,6 +93,7 @@ getJSON('https://raw.githubusercontent.com/lsv/fifa-worldcup-2018/master/data.js
                 'played': 0,
                 'scored': 0,
                 'conceded' : 0,
+                'goal_diff': 0
 			},
             {
             	'player': 'Anto',
@@ -95,6 +102,7 @@ getJSON('https://raw.githubusercontent.com/lsv/fifa-worldcup-2018/master/data.js
                 'played': 0,
                 'scored': 0,
                 'conceded' : 0,
+                'goal_diff': 0
 			}
         ];
 
@@ -108,7 +116,8 @@ getJSON('https://raw.githubusercontent.com/lsv/fifa-worldcup-2018/master/data.js
                     'points': 0,
                     'scored': 0,
                     'conceded': 0,
-                    'played': 0
+                    'played': 0,
+                	'goal_diff': 0
 				}            	
     	}   
 		
@@ -156,14 +165,15 @@ getJSON('https://raw.githubusercontent.com/lsv/fifa-worldcup-2018/master/data.js
                     player.scored += team.scored
                     player.conceded += team.conceded
                     player.played += team.played
+                    player.goal_diff = player.scored - player.conceded
 				}
 			}
         }
             
-        var table = "<table border=\"1\"><tr><th>Player</th><th>Played</th><th>Scored</th><th>Conceded</th><th>Points</th></tr>";
+        var table = "<table border=\"1\"><tr><th>Player</th><th>Played</th><th>Scored</th><th>Conceded</th><th>Goal Diff</th><th>Points</th></tr>";
         
         player_list.sort(function (a, b) {
-  			return b.points - a.points || b.scored - a.scored || b.conceded - a.conceded;
+  			return b.points - a.points || b.goal_diff - a.goal_diff || b.scored - a.scored || b.conceded - a.conceded;
 		});
          
     	for (var key in player_list) {
@@ -177,6 +187,8 @@ getJSON('https://raw.githubusercontent.com/lsv/fifa-worldcup-2018/master/data.js
             table += "</td><td>"
             table += t.conceded
             table += "</td><td>"
+            table += t.goal_diff
+            table += "</td><td>"
             table += t.points
             table += "</td></tr>"	
     	}
@@ -184,6 +196,8 @@ getJSON('https://raw.githubusercontent.com/lsv/fifa-worldcup-2018/master/data.js
         document.body.innerHTML = table
     }
 });
+
+document.write("TEST")
 
 </script>
 
